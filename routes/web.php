@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -22,10 +23,10 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function(){
     
-    Route::get('/home', function(){
-        return view('pages.dashboard');
-    })->name('home');
-
+    // Route::get('/home', function(){
+    //     return view('pages.dashboard');
+    // })->name('home');
+    Route::get('/home', [DashboardController::class, 'index'])->name('home');
     Route::resource('user', UserController::class);
     Route::resource('products', ProductController::class);
     Route::resource('categories', CategoryController::class);
