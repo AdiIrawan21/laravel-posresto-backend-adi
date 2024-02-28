@@ -32,3 +32,6 @@ Route::apiResource('/api-categories', App\Http\Controllers\Api\CategoriesControl
 
 //orders api
 Route::post('/save-order', [App\Http\Controllers\Api\OrderController::class, 'saveOrder'])->middleware('auth:sanctum');
+
+// discount api
+Route::get('/api-discounts', [App\Http\Controllers\Api\DiscountController::class, 'index'])->middleware('auth:sanctum');
