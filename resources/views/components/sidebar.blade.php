@@ -1,7 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ url('home') }}"><i class="fa fa-cutlery" aria-hidden="true"></i> AJB Resto</a>
+            <a href="{{ url('home') }}"><i class="fa fa-cutlery" aria-hidden="true"></i> AJB Cafe</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ url('home') }}">AJB</a>
@@ -18,7 +18,7 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fa fa-database" aria-hidden="true"></i></i><span>Master Data</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fa fa-database" aria-hidden="true"></i><span>Master Data</span></a>
                 <ul class="dropdown-menu">
                     <li '>
                         <a class="nav-link" href="{{ route('user.index') }}"><i class="fa fa-users" aria-hidden="true"></i>Users</a>
@@ -31,6 +31,15 @@
                         <a class="nav-link" href="{{ route('products.index') }}"><i class="fa fa-shopping-basket" aria-hidden="true"></i>Products</a>
                     </li>
 
+                </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fa fa-calendar" aria-hidden="true"></i><span>Transaction</span></a>
+                <ul class="dropdown-menu">
+                    <li class='{{ Request::is('home') ? 'active' : '' }}'>
+                        <a class="nav-link" href="{{ url('reports') }}"><i class="fa-solid fa-cart-shopping"></i>Orders</a>
+                    </li>
                 </ul>
             </li>
         </ul>

@@ -95,10 +95,10 @@
                                         <input type="radio" name="role" value="staff" class="selectgroup-input">
                                         <span class="selectgroup-button">Staff</span>
                                     </label>
-                                    <label class="selectgroup-item">
+                                    {{-- <label class="selectgroup-item">
                                         <input type="radio" name="role" value="user" class="selectgroup-input">
                                         <span class="selectgroup-button">User</span>
-                                    </label>
+                                    </label> --}}
 
                                 </div>
                             </div>

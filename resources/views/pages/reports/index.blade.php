@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Products')
+@section('title', 'Reports')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -11,14 +11,14 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Product</h1>
-                <div class="section-header-button">
+                <h1>Transaction</h1>
+                {{-- <div class="section-header-button">
                     <a href="{{ route('products.create') }}" class="btn btn-primary">Add New</a>
-                </div>
+                </div> --}}
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Products</a></div>
-                    <div class="breadcrumb-item">All Products</div>
+                    <div class="breadcrumb-item"><a href="#">Transaction</a></div>
+                    {{-- <div class="breadcrumb-item">All Products</div> --}}
                 </div>
             </div>
             <div class="section-body">
@@ -33,15 +33,15 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>All Posts</h4>
+                                <h4>History Orders</h4>
                             </div>
                             <div class="card-body">
                                 <div class="float-left">
-                                    <h5>List Products</h5>
+                                    <h5>List Orders</h5>
                                 </div>
 
                                 <div class="float-right">
-                                    <form method="GET" action="{{ route('products.index') }}">
+                                    <form method="GET" action="{{ route('reports.index') }}">
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search" name="search">
                                             <div class="input-group-append">
@@ -57,47 +57,34 @@
                                     <table class="table-striped table">
                                         <tr>
 
-                                            <th>Name</th>
-                                            <th>Category</th>
-                                            <th>Price</th>
-                                            <th>Status</th>
-                                            <th>Created At</th>
-                                            <th>Action</th>
+                                            <th>Kasir</th>
+                                            <th>Total Order</th>
+                                            <th>Total Item</th>
+                                            <th>Metode Pembayaran</th>
+                                            <th>Jumlah Uang</th>
+                                            <th>Tanggal Transaksi</th>
                                         </tr>
-                                        @foreach ($products as $product)
+                                        @foreach ($reports as $report)
                                             <tr>
 
-                                                <td>{{ $product->name }}
+                                                <td>{{ $report->nama_kasir }}
                                                 </td>
                                                 <td>
-                                                    {{ $product->category->name }}
+                                                    {{ 'Rp. ' . number_format($report->total, 0, ',', '.') }}
+                                                </td>
+                                                
+                                                <td>
+                                                    {{ $report->total_item }}
                                                 </td>
                                                 <td>
-                                                    {{ 'Rp. ' . number_format($product->price, 0, ',', '.') }}
+                                                    {{ $report->payment_method }}
                                                 </td>
                                                 <td>
-                                                    {{ $product->status == 1 ? 'Instock' : 'Outstock' }}
+                                                    {{ 'Rp. ' . number_format($report->payment_amount, 0, ',', '.' )}}
                                                 </td>
-                                                <td>{{ $product->created_at }}</td>
-                                                <td>
-                                                    <div class="d-flex justify-content-center">
-                                                        <a href='{{ route('products.edit', $product->id) }}'
-                                                            class="btn btn-sm btn-info btn-icon">
-                                                            <i class="fas fa-edit"></i>
-                                                            Edit
-                                                        </a>
+                                                <td>{{ date('d/m/Y H:i:s', strtotime($report->transaction_time)) }}</td>
 
-                                                        <form action="{{ route('products.destroy', $product->id) }}"
-                                                            method="POST" class="ml-2">
-                                                            <input type="hidden" name="_method" value="DELETE" />
-                                                            <input type="hidden" name="_token"
-                                                                value="{{ csrf_token() }}" />
-                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                                                                <i class="fas fa-times"></i> Delete
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
+
                                             </tr>
                                         @endforeach
 
@@ -105,7 +92,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $products->withQueryString()->links() }}
+                                    {{ $reports->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>
