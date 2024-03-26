@@ -58,8 +58,10 @@
                                         <tr>
 
                                             <th>Kasir</th>
-                                            <th>Total Order</th>
                                             <th>Total Item</th>
+                                            <th>Sub Total</th>
+                                            <th>Diskon(%)</th>
+                                            <th>Total Order</th>
                                             <th>Metode Pembayaran</th>
                                             <th>Jumlah Uang</th>
                                             <th>Tanggal Transaksi</th>
@@ -69,12 +71,21 @@
 
                                                 <td>{{ $report->nama_kasir }}
                                                 </td>
-                                                <td>
-                                                    {{ 'Rp. ' . number_format($report->total, 0, ',', '.') }}
-                                                </td>
                                                 
                                                 <td>
                                                     {{ $report->total_item }}
+                                                </td>
+                                                
+                                                <td>
+                                                    {{ 'Rp. ' . number_format($report->sub_total, 0, ',', '.') }}
+                                                </td>
+                                                
+                                                <td>
+                                                    {{ $report->discount }}
+                                                </td>
+
+                                                <td>
+                                                    {{ 'Rp. ' . number_format($report->total, 0, ',', '.') }}
                                                 </td>
                                                 <td>
                                                     {{ $report->payment_method }}
