@@ -33,9 +33,16 @@ Route::apiResource('/api-categories', App\Http\Controllers\Api\CategoriesControl
 //orders api
 Route::post('/save-order', [App\Http\Controllers\Api\OrderController::class, 'saveOrder'])->middleware('auth:sanctum');
 
+Route::get('/orders/{date?}', [App\Http\Controllers\Api\OrderController::class, 'index'])->middleware('auth:sanctum');
+Route::get('/summary/{date?}', [App\Http\Controllers\Api\OrderController::class, 'summary'])->middleware('auth:sanctum');
+
 // discount api
 Route::get('/api-discounts', [App\Http\Controllers\Api\DiscountController::class, 'index'])->middleware('auth:sanctum');
 
 Route::post('/api-discounts', [App\Http\Controllers\Api\DiscountController::class, 'store'])->middleware('auth:sanctum');
 Route::put('/api-discounts/{id}', [App\Http\Controllers\Api\DiscountController::class, 'update'])->middleware('auth:sanctum');
 Route::delete('/api-discounts/{id}', [App\Http\Controllers\Api\DiscountController::class, 'destroy'])->middleware('auth:sanctum');
+
+// Order Item api
+Route::get('/order-item/{date?}', [App\Http\Controllers\Api\OrderItemController::class, 'index'])->middleware('auth:sanctum');
+Route::get('/order-sales', [App\Http\Controllers\Api\OrderItemController::class, 'orderSales'])->middleware('auth:sanctum');
