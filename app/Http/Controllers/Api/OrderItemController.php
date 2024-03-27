@@ -29,6 +29,7 @@ class OrderItemController extends Controller
             'data' => $orderItems
         ], 200);
     }
+    
     public function orderSales(Request $request)
 {
     $startDate = $request->input('start_date');
