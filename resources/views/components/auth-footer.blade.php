@@ -1,3 +1,3 @@
   <div class="simple-footer">
-      Copyright &copy; AJB Resto
+      Copyright &copy;Kepiting Mas Gembul
   </div>
