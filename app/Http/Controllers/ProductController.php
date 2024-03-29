@@ -11,20 +11,20 @@ class ProductController extends Controller
 {
     // index
     public function index(Request $request)
-{
-    $query = Product::query(); // Mulai dengan membangun kueri Eloquent dari model Product
+    {
+        $query = Product::query(); // Mulai dengan membangun kueri Eloquent dari model Product
 
-    // Tambahkan filter pencarian jika ada
-    if ($request->has('search')) {
-        $query->where('name', 'like', '%' . $request->search . '%');
+        // Tambahkan filter pencarian jika ada
+        if ($request->has('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        // Dapatkan produk berdasarkan kueri yang telah dibangun
+        $products = $query->paginate(10);
+
+        // Kirimkan data ke view
+        return view('pages.products.index', compact('products'));
     }
-
-    // Dapatkan produk berdasarkan kueri yang telah dibangun
-    $products = $query->paginate(10);
-
-    // Kirimkan data ke view
-    return view('pages.products.index', compact('products'));
-}
 
     // create
     public function create()
@@ -122,21 +122,26 @@ class ProductController extends Controller
     }
 
     // destroy
-    public function destroy($id){
+    public function destroy($id)
+    {
         // Ambil produk yang akan dihapus
         $product = Product::find($id);
         // Periksa apakah produk ditemukan
         if ($product) {
+            // Periksa apakah produk sudah digunakan di dalam order_items
+            if ($product->orderItems()->exists()) {
+                return redirect()->route('products.index')->with('error', 'Gagal, produk sudah digunakan dalam pesanan');
+            }
+
             // Hapus file gambar dari sistem file
             if ($product->image) {
                 Storage::delete('public/products/' . basename($product->image));
             }
             // Hapus produk dari database
             $product->delete();
-            return redirect()->route('products.index')->with('success', 'Product deleted successfully');
+            return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus');
         } else {
-            return redirect()->route('products.index')->with('error', 'Product not found');
+            return redirect()->route('products.index')->with('error', 'Produk tidak ditemukan');
         }
     }
-
 }
