@@ -10,18 +10,20 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     //index
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         //get users with pagination
         $users = DB::table('users')
-        ->when($request->search, function ($query) use ($request){
-            return $query->where('name', 'like', '%'.$request->search.'%');
-        })->paginate(5);
+            ->when($request->search, function ($query) use ($request) {
+                return $query->where('name', 'like', '%' . $request->search . '%');
+            })->paginate(5);
         // $users = \App\Models\Users::all();
         return view('pages.user.index', compact('users'));
     }
 
     //create
-    public function create(){
+    public function create()
+    {
         return view('pages.user.create');
     }
 
@@ -32,7 +34,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
+            'password' => 'required|max:8',
             'role' => 'required|in:admin,staff',
         ]);
 
@@ -48,18 +50,21 @@ class UserController extends Controller
     }
 
     //show
-    public function show($id){
+    public function show($id)
+    {
         return view('pages.user.show');
     }
 
     //edit
-    public function edit($id){
+    public function edit($id)
+    {
         $user = User::find($id);
         return view('pages.user.edit', compact('user'));
     }
 
     //update
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         // validate the request
         $request->validate([
             'name' => 'required',
@@ -84,10 +89,11 @@ class UserController extends Controller
     }
 
     //delete
-    public function destroy($id){
+    public function destroy($id)
+    {
         // delete the request
         $user = User::find($id);
-        $user-> delete();
+        $user->delete();
 
         return redirect()->route('user.index')->with('success', 'User deleted successfully');
     }
