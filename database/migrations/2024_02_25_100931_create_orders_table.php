@@ -19,11 +19,11 @@ return new class extends Migration
             $table->integer('discount');
             $table->integer('service_charge');
             $table->integer('total');
-            $table->string('payment_method');
+            $table->string('payment_method', 30);
             $table->integer('total_item');
             $table->integer('id_kasir');
-            $table->string('nama_kasir');
-            $table->string('transaction_time');
+            $table->string('nama_kasir', 50);
+            $table->string('transaction_time', 100);
             $table->timestamps();
         });
     }
