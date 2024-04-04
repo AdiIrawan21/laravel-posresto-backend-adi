@@ -13,15 +13,12 @@ class CheckAdmin
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, ...$roles)
     {
-       // Memeriksa apakah pengguna memiliki peran 'admin'
-       if ($request->user() && $request->user()->hasRole('admin')) {
-        // Jika iya, lanjutkan permintaan
-        return $next($request);
-    }
+        if (!$request->user() || !$request->user()->hasAnyRole($roles)) {
+            return redirect('home')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
 
-    // Jika tidak, arahkan pengguna ke halaman lain atau kembalikan respons yang sesuai
-    return redirect()->route('home')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        return $next($request);
     }
 }
