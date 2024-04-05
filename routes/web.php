@@ -22,14 +22,10 @@ Route::get('/', function () {
     return view('pages.auth.login');
 });
 
-Route::middleware(['auth', 'cekLevel:admin'])->group(function () {
-
-    Route::resource('user', UserController::class);
-});
-
-Route::middleware(['auth', 'cekLevel:admin,staff'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [DashboardController::class, 'index'])->name('home');
-    Route::resource('products', ProductController::class, 'index');
+    Route::resource('user', UserController::class);
+    Route::resource('products', ProductController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('reports', ReportController::class);
 });
