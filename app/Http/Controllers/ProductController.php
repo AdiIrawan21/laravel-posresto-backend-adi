@@ -42,8 +42,8 @@ class ProductController extends Controller
             'description' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required',
-            'stock' => 'required|numeric',
-            'status' => 'required|boolean',
+            //'stock' => 'required|numeric',
+            //'status' => 'required|boolean',
             'is_favorite' => 'required|boolean',
 
         ]);
@@ -54,8 +54,8 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->category_id = $request->category_id;
-        $product->stock = $request->stock;
-        $product->status = $request->status;
+        //$product->stock = $request->stock;
+        //$product->status = $request->status;
         $product->is_favorite = $request->is_favorite;
 
         $product->save();
@@ -94,8 +94,8 @@ class ProductController extends Controller
             'description' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required',
-            'stock' => 'required|numeric',
-            'status' => 'required|boolean',
+            //'stock' => 'required|numeric',
+            //'status' => 'required|boolean',
             'is_favorite' => 'required|boolean',
         ]);
 
@@ -105,8 +105,8 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->category_id = $request->category_id;
-        $product->stock = $request->stock;
-        $product->status = $request->status;
+        //$product->stock = $request->stock;
+        //$product->status = $request->status;
         $product->is_favorite = $request->is_favorite;
         $product->save();
 

@@ -60,7 +60,7 @@
                                             <th>Name</th>
                                             <th>Category</th>
                                             <th>Price</th>
-                                            <th>Status</th>
+                                            <th>Favorite</th>
                                             <th>Created At</th>
                                             <th>Action</th>
                                         </tr>
@@ -76,7 +76,7 @@
                                                     {{ 'Rp. ' . number_format($product->price, 0, ',', '.') }}
                                                 </td>
                                                 <td>
-                                                    {{ $product->status == 1 ? 'Instock' : 'Outstock' }}
+                                                    {{ $product->is_favorite == 1 ? 'Yes' : 'No' }}
                                                 </td>
                                                 <td>{{ $product->created_at }}</td>
                                                 <td>

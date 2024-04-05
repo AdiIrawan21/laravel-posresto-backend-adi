@@ -74,7 +74,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>Stock</label>
                                 <input type="number"
                                     class="form-control @error('stock')
@@ -86,7 +86,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                             <div class="form-group">
                                 <label class="form-label">Category</label>
@@ -112,7 +112,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label class="form-label">Status</label>
                                 <div class="selectgroup selectgroup-pills">
                                     <label class="selectgroup-item">
@@ -125,7 +125,7 @@
                                         <span class="selectgroup-button">Inactive</span>
                                     </label>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             {{-- is favorite --}}
                             <div class="form-group">
