@@ -44,9 +44,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // Dalam model User
-    // public function hasAnyRole(...$roles)
-    // {
-    //     return in_array($this->role, $roles);
-    // }
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
 }
