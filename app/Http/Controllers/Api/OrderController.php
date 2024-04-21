@@ -16,10 +16,10 @@ class OrderController extends Controller
         $request->validate([
             'payment_amount' => 'required',
             'sub_total' => 'required',
-            'tax' => 'required',
+            //'tax' => 'required',
             'discount' => 'required',
             'discount_amount' => 'required',
-            'service_charge' => 'required',
+            //'service_charge' => 'required',
             'total' => 'required',
             'payment_method' => 'required',
             'total_item' => 'required',
@@ -33,10 +33,10 @@ class OrderController extends Controller
         $order = Order::create([
             'payment_amount' => $request->payment_amount,
             'sub_total' => $request->sub_total,
-            'tax' => $request->tax,
+            //'tax' => $request->tax,
             'discount' => $request->discount,
             'discount_amount' => $request->discount_amount,
-            'service_charge' => $request->service_charge,
+            //'service_charge' => $request->service_charge,
             'total' => $request->total,
             'payment_method' => $request->payment_method,
             'total_item' => $request->total_item,
@@ -63,63 +63,62 @@ class OrderController extends Controller
 
 
     public function index(Request $request)
-{
-    $start_date = $request->input('start_date');
-    $end_date = $request->input('end_date');
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
 
-    // Menyesuaikan endDate untuk memastikan pencarian sampai akhir hari tersebut
-    if ($end_date) {
-        $end_date = $end_date . ' 23:59:59';
+        // Menyesuaikan endDate untuk memastikan pencarian sampai akhir hari tersebut
+        if ($end_date) {
+            $end_date = $end_date . ' 23:59:59';
+        }
+
+        if ($start_date && $end_date) {
+            $orders = Order::whereBetween('created_at', [$start_date, $end_date])->get();
+        } else {
+            $orders = Order::all();
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $orders
+        ], 200);
     }
 
-    if ($start_date && $end_date) {
-        $orders = Order::whereBetween('created_at', [$start_date, $end_date])->get();
-    } else {
-        $orders = Order::all();
+
+    public function summary(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        // Menyesuaikan endDate untuk memastikan pencarian sampai akhir hari tersebut
+        if ($endDate) {
+            $endDate = $endDate . ' 23:59:59';
+        }
+
+        $query = Order::query();
+        if ($startDate && $endDate) {
+            $query->whereBetween('created_at', [$startDate, $endDate]);
+        }
+        $totalRevenue = $query->sum('payment_amount');
+        $totalDiscount = $query->sum('discount_amount');
+        //$totalTax = $query->sum('tax');
+        //$totalServiceCharge = $query->sum('service_charge');
+        $totalSubtotal = $query->sum('sub_total');
+
+        // Pastikan perhitungan total sesuai dengan logika bisnis Anda
+        $total = $totalSubtotal - $totalDiscount;
+
+        // $total = $totalSubtotal - $totalDiscount + $totalTax + $totalServiceCharge;
+        return response()->json([
+            'status' => 'success',
+            'data' => [
+                'total_revenue' => $totalRevenue,
+                'total_discount' => $totalDiscount,
+                //'total_tax' => $totalTax,
+                //'total_service_charge' => $totalServiceCharge,
+                'total_subtotal' => $totalSubtotal,
+                'total' => $total,
+            ]
+        ], 200);
     }
-
-    return response()->json([
-        'status' => 'success',
-        'data' => $orders
-    ], 200);
-}
-
-
-public function summary(Request $request)
-{
-    $startDate = $request->input('start_date');
-    $endDate = $request->input('end_date');
-
-    // Menyesuaikan endDate untuk memastikan pencarian sampai akhir hari tersebut
-    if ($endDate) {
-        $endDate = $endDate . ' 23:59:59';
-    }
-
-    $query = Order::query();
-    if ($startDate && $endDate) {
-        $query->whereBetween('created_at', [$startDate, $endDate]);
-    }
-    $totalRevenue = $query->sum('payment_amount');
-    $totalDiscount = $query->sum('discount_amount');
-    $totalTax = $query->sum('tax');
-    $totalServiceCharge = $query->sum('service_charge');
-    $totalSubtotal = $query->sum('sub_total');
-
-    // Pastikan perhitungan total sesuai dengan logika bisnis Anda
-    $total = $totalSubtotal - $totalDiscount + $totalTax + $totalServiceCharge;
-
-    return response()->json([
-        'status' => 'success',
-        'data' => [
-            'total_revenue' => $totalRevenue,
-            'total_discount' => $totalDiscount,
-            'total_tax' => $totalTax,
-            'total_service_charge' => $totalServiceCharge,
-            'total_subtotal' => $totalSubtotal,
-            'total' => $total,
-        ]
-    ], 200);
-}
-
-
 }
