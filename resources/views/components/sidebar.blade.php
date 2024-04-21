@@ -1,10 +1,10 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ url('home') }}"><i class="fa fa-cutlery" aria-hidden="true"></i> Kepiting Mas Gembul</a>
+            <a href="{{ url('home') }}"><i class="fa fa-cutlery" aria-hidden="true"></i> AJB FC</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="{{ url('home') }}">KMG</a>
+            <a href="{{ url('home') }}">AJB FC</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Admin Panel</li>

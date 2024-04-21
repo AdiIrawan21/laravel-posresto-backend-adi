@@ -26,7 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
     // Hanya admin yang dapat mengakses route ini
-    Route::middleware(['check.admin'])->group(function () {
+    Route::middleware(['cekAdmin'])->group(function () {
         Route::resource('user', UserController::class);
     });
 

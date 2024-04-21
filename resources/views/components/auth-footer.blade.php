@@ -1,3 +1,3 @@
   <div class="simple-footer">
-      Copyright &copy;Kepiting Mas Gembul
+      Copyright &copy;AJB FC
   </div>
