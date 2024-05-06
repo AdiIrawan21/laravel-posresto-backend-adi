@@ -66,11 +66,11 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <a href='{{ route('categories.edit', $category->id) }}'
+                                                        {{-- <a href='{{ route('categories.edit', $category->id) }}'
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
-                                                        </a>
+                                                        </a> --}}
 
                                                         {{-- <form action="{{ route('categories.destroy', $category->id) }}"
                                                             method="POST" class="ml-2">

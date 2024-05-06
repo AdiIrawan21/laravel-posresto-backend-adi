@@ -23,13 +23,13 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fa fa-database"
                         aria-hidden="true"></i><span>Master Data</span></a>
                 <ul class="dropdown-menu">
-                    @if (auth()->check() && auth()->user()->role == 'admin')
-                        <li>
-                            <a class="nav-link" href="{{ route('user.index') }}">
-                                <i class="fa fa-users" aria-hidden="true"></i>Users
-                            </a>
-                        </li>
-                    @endif
+
+                    <li>
+                        <a class="nav-link" href="{{ route('user.index') }}">
+                            <i class="fa fa-users" aria-hidden="true"></i>Users
+                        </a>
+                    </li>
+
 
                     <li>
                         <a class="nav-link" href="{{ route('categories.index') }}"><i class="fa fa-bars"
