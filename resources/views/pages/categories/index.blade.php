@@ -58,7 +58,7 @@
                                     <table class="table-striped table">
                                         <tr>
                                             <th>Name</th>
-                                            <th>Action</th>
+                                            {{-- <th>Action</th> --}}
                                         </tr>
                                         @foreach ($categories as $category)
                                             <tr>
