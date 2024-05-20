@@ -25,13 +25,14 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
-    // Hanya admin yang dapat mengakses route ini
-    Route::middleware(['cekAdmin'])->group(function () {
-        Route::resource('user', UserController::class);
-    });
+    // // Hanya admin yang dapat mengakses route ini
+    // Route::middleware(['cekAdmin'])->group(function () {
+    //     Route::resource('user', UserController::class);
+    // });
 
     // Route yang dapat diakses oleh semua user yang terautentikasi
     Route::resource('products', ProductController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('reports', ReportController::class);
+    Route::resource('user', UserController::class);
 });

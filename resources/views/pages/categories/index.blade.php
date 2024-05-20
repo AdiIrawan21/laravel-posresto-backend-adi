@@ -32,9 +32,6 @@
                 <div class="row mt-4">
                     <div class="col-12">
                         <div class="card">
-                            {{-- <div class="card-header">
-                                <h4>All category</h4>
-                            </div> --}}
                             <div class="card-body">
 
                                 <div class="float-left">
@@ -58,7 +55,6 @@
                                     <table class="table-striped table">
                                         <tr>
                                             <th>Name</th>
-                                            {{-- <th>Action</th> --}}
                                         </tr>
                                         @foreach ($categories as $category)
                                             <tr>
@@ -66,21 +62,6 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        {{-- <a href='{{ route('categories.edit', $category->id) }}'
-                                                            class="btn btn-sm btn-info btn-icon">
-                                                            <i class="fas fa-edit"></i>
-                                                            Edit
-                                                        </a> --}}
-
-                                                        {{-- <form action="{{ route('categories.destroy', $category->id) }}"
-                                                            method="POST" class="ml-2">
-                                                            <input type="hidden" name="_method" value="DELETE" />
-                                                            <input type="hidden" name="_token"
-                                                                value="{{ csrf_token() }}" />
-                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                                                                <i class="fas fa-times"></i> Delete
-                                                            </button>
-                                                        </form> --}}
                                                     </div>
                                                 </td>
                                             </tr>
